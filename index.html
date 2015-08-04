@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/cheatsheet/" style="font-size: 10px;">cheatsheet</a> <a href="/tags/git/" style="font-size: 10px;">git</a>
+						<a href="/tags/cheatsheet/" style="font-size: 20px;">cheatsheet</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a>
 					</div>
 				</section>
 				
@@ -199,6 +199,126 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-linux-comments" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/04/linux-comments/" class="article-date">
+  	<time datetime="2015-08-04T04:26:20.925Z" itemprop="datePublished">2015-08-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/04/linux-comments/">Linux 常用命令</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="#_表示权限用户(如:root),_$_表示普通用户"># 表示权限用户(如:root),  $ 表示普通用户</h3><p>开机提示:Login:输入用户名<br>password:输入口令 用户是系统注册用户成功登陆后，可以进入相应的用户环境.<br>退出当前shell,输入:exit</p>
+<h3 id="添加删除用户">添加删除用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">useradd netseek <span class="comment">#添加一个netseek用户</span></span><br><span class="line">passwd netseek <span class="comment">#给netseek这个用户设置密码.(/etc/passwd /etc/group)</span></span><br><span class="line">userdel netseek <span class="comment">#删除账号</span></span><br><span class="line">userdel -r netseek <span class="comment">#删除账号连同自家目录.</span></span><br></pre></td></tr></table></figure>
+<h3 id="su在不退出登陆的情况下，切换到另一个身份">su在不退出登陆的情况下，切换到另一个身份</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#su -l 用户名(如果用户名缺省,则切换到root状态)</span></span><br><span class="line">su <span class="operator">-l</span> netseek (切换到netseek这个用户，将提示输入密码),加上-表示切换到用户的环境变量.</span><br></pre></td></tr></table></figure>
+<p>  sudo 利用他可以执行root执行的权限</p>
+<h3 id="查看命令_ls">查看命令 ls</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ls <span class="operator">-l</span> <span class="comment">#显示文件列表</span></span><br><span class="line">ls -al <span class="operator">-a</span> <span class="comment">#显示所有档案及目录 (ls内定将档案名或目录名称开头为”.”的视为隐藏档，不会列出)</span></span><br><span class="line">ls -sh <span class="comment">#(man ls 查看man帮助.)</span></span><br></pre></td></tr></table></figure>
+<p>  linux几种文件类型:</p>
+<blockquote>
+<p>   d 表示此文件是一个目录<br>    – 表示此文件是一个普通文件<br>    b 表示此文件是一个特殊的块设备I/O文件<br>    c 表示此文件是一个特殊的字符设备I/O文件<br>    l 表示此文件是一个连接文件。在其文件名称后紧跟与它连接的文件路径及名称<br>  file 命令通过探测文件内容判断文件类型</p>
+</blockquote>
+<h3 id="grep命令">grep命令</h3><p> 该命令常用于分析一行的信息，若当中有我们所需要的信息，就将该行显示出来，该命令通常与管道命令一起使用，用于对一些命令的输出进行筛选加工等等，它的简单语法为<br>    grep [-acinv] [–color=auto] ‘查找字符串’ filename<br>  它的常用参数如下：</p>
+<blockquote>
+<p>-a ：将binary文件以text文件的方式查找数据<br>-c ：计算找到‘查找字符串’的次数<br>-i ：忽略大小写的区别，即把大小写视为相同<br>-v ：反向选择，即显示出没有‘查找字符串’内容的那一行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 取出文件/etc/man.config中包含MANPATH的行，并把找到的关键字加上颜色  </span></span><br><span class="line">grep --color=auto <span class="string">'MANPATH'</span> /etc/man.config  </span><br><span class="line"><span class="comment"># 把ls -l的输出中包含字母file（不区分大小写）的内容输出  </span></span><br><span class="line">ls <span class="operator">-l</span> | grep -i file</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>4、find命令</p>
+<h3 id="建立文件和目录">建立文件和目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">touch <span class="number">1</span>.txt</span><br><span class="line">cat &gt; <span class="number">2</span>.txt <span class="comment">#(用定向符创建文件，填写内容后，按ctrl+d保存内容)</span></span><br><span class="line">mkdir mywork <span class="comment">#建立mywork这个目录</span></span><br></pre></td></tr></table></figure>
+<h3 id="拷贝文件或目录">拷贝文件或目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp filename1 filename2</span><br><span class="line">cp -r dir1 dir2 <span class="comment">#复制目录</span></span><br><span class="line"><span class="comment">#cp -rf 参数f是删除已经存在的目标文件而不提示</span></span><br><span class="line"><span class="comment">#cp -i 参数i和f相反，在覆盖目标文件之前将给出提示要求用户确认，回答y时目标文件将被覆盖，是交互式拷贝.</span></span><br></pre></td></tr></table></figure>
+<h3 id="删除文件和目录(删除文件或目录都可以用rm搞定)">删除文件和目录(删除文件或目录都可以用rm搞定)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm <span class="number">1</span>.c <span class="comment">#将1.c这个文件删除</span></span><br><span class="line">**rm -rf <span class="comment"># 强制删除文件或目录,删除时不提示.**</span></span><br></pre></td></tr></table></figure>
+<h3 id="移走目录或者改文件名">移走目录或者改文件名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv [opitons] 源文件或目录 目标文件或目录</span><br><span class="line">mv hello ../ 将hello目录或者文件移动上一级.</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>[options]主要参数<br>-i:交互方式操作，如果mv操作将导致对已存在的目标文件的覆盖，此时系统询问是否重写，要求用户回答“y”或“n”，<br>这样可以避免误覆盖文件.<br>-f:禁止交互操作。mv操作要覆盖某个已有的目标文件时不给任何指示，指定此参数后i参数将不再起作用。</p>
+</blockquote>
+<h3 id="alias_别名">alias 别名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> dir=’ls <span class="operator">-l</span>’ <span class="comment">#输入dir，其实就相当于执行了ls -l</span></span><br></pre></td></tr></table></figure>
+<h3 id="权限的控制(rwx_421)">权限的控制(rwx 421)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chmod +x hello.sh <span class="comment">#赋于可执行权限.</span></span><br><span class="line"><span class="comment"># chmod 命令 权限修改 用法：chmod 一位8进制数 filename (rwx 421)</span></span><br><span class="line">chmod u+x filenmame <span class="comment">#只想给自己运行，别人只能读</span></span><br><span class="line">chown netseek.netseek mydir <span class="comment">#改变用户属组</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>u：表示文件所有者    g：表示同组用户    o：表示其它用户     a：表示所有用户<br>  +：添加某个权限      -：取消某个权限    =：赋予给定的权限，并取消原有的权限<br>  r：可读 4           w：可写 2         x：可执行 1</p>
+</blockquote>
+<h3 id="pwd_显示当前目录完整路径和改变目录">pwd 显示当前目录完整路径和改变目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> netseek <span class="comment">#进入netseek这个目录</span></span><br><span class="line"><span class="built_in">cd</span> <span class="comment">#退出当前目录</span></span><br><span class="line"><span class="built_in">cd</span> ../ <span class="comment">#进入上一级目录.</span></span><br><span class="line"><span class="built_in">cd</span> – <span class="comment">#返回上一次目录</span></span><br><span class="line"><span class="built_in">cd</span> ~ <span class="comment">#返回主目录</span></span><br></pre></td></tr></table></figure>
+<h3 id="cat,_more,_less_命令">cat, more, less 命令</h3><p>将某个文件的内容显示出来，两个命令不同的是:cat 把文件内容一直打印出来，而more则分展显示.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">less <span class="comment">#可以上下翻滚查看内容.</span></span><br><span class="line">cat &gt; <span class="number">1</span>.txt <span class="comment">#可以填写或者复制内容,按ctrl+d保存</span></span><br><span class="line">cat <span class="number">1</span>.c</span><br><span class="line">more <span class="number">1</span>.c</span><br><span class="line">head -n filename <span class="comment">#显示第N行的内容</span></span><br><span class="line">tail -n filename <span class="comment">#显示后N行的内容</span></span><br><span class="line">tail -n <span class="number">20</span> /var/<span class="built_in">log</span>/message <span class="comment">#显示最新的20行日志</span></span><br><span class="line">tail -n - f filename <span class="comment">#显示后N行的内容, 并且实时跟踪文件改动</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="设置linux时间和日期">设置linux时间和日期</h3><p>date 命令(“date MMDDhhmmYYYY.ss”)    2006年7月24日12:37 ,30秒<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">date <span class="number">072412372006.30</span></span><br><span class="line">date <span class="operator">-s</span> <span class="number">20</span>:<span class="number">30</span>:<span class="number">30</span> <span class="comment">#设置系统时间为20: 30:30</span></span><br><span class="line">date <span class="operator">-s</span> <span class="number">2006</span>-<span class="number">7</span>-<span class="number">24</span> <span class="comment">#设置系统时期为2006-7-24</span></span><br><span class="line">clock -r <span class="comment">#对系统Bios中读取时间参数</span></span><br><span class="line">clock -w <span class="comment">#将系统时间(如由date设置的时间)写入Bios</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="查看找文件(find,_grep,_awk更多的请参照man_page或shell编程专题讲解)">查看找文件(find, grep, awk更多的请参照man page或shell编程专题讲解)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#find 路径 -name 文件名</span></span><br><span class="line">find /etc -name named.conf</span><br><span class="line"><span class="comment">#locate 通过文件名搜索文件的工具(要先通过updatedb建立索引数据库)</span></span><br><span class="line">localte named.conf</span><br><span class="line"><span class="comment">#whereis 是寻找二进制文件，同时也会找到其帮助文件</span></span><br><span class="line"><span class="comment">#which 和where 相似，只是我们所设置的环境变量中设置好的路径中寻找；比如；</span></span><br></pre></td></tr></table></figure>
+<h3 id="查杀进程">查杀进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ps aux <span class="comment"># 查看系统所有的进程数据</span></span><br><span class="line">ps ax <span class="comment"># 查看不与terminal有关的所有进程  </span></span><br><span class="line">ps -ef |grep</span><br><span class="line"><span class="built_in">kill</span> -<span class="number">9</span></span><br><span class="line"><span class="comment">#看看哪个进程占用的内存最大</span></span><br><span class="line">ps -aux|sort +<span class="number">5</span>n</span><br></pre></td></tr></table></figure>
+<h3 id="将程序放在前后台执行">将程序放在前后台执行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp file1 file2 &amp;</span><br><span class="line"><span class="comment">#**&amp;与ctrl+z 你可以使用&amp;或ctrl+z来将命令放在后台执行.**</span></span><br><span class="line"><span class="comment">#fg 是将放在后台执行的程序再放回前台.</span></span><br><span class="line"><span class="built_in">jobs</span></span><br></pre></td></tr></table></figure>
+<h3 id="whoami,id,w,lastlog">whoami,id,w,lastlog</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">w 查看用户登陆信息</span><br><span class="line">who 查看当前登陆用户</span><br><span class="line">last 最近一个月用户登陆情况</span><br><span class="line">lastlog 检查某特定用户上次登录的时间，并格式化输出上次登录日志/var/<span class="built_in">log</span>/lastlog的内容</span><br><span class="line">whoami 确认自己身份.</span><br></pre></td></tr></table></figure>
+<h3 id="用户用过的命令和执行历史执行的命令">用户用过的命令和执行历史执行的命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span> <span class="comment">#显示用户过去命用的命令</span></span><br><span class="line">!! <span class="comment">#执行最近一次的命令</span></span><br></pre></td></tr></table></figure>
+<h3 id="查看linux系统占用的资源(top,free,uptime)">查看linux系统占用的资源(top,free,uptime)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#top 查看后台程序，监控系统性能</span></span><br><span class="line">top <span class="operator">-d</span> <span class="number">2</span> 每两秒列新一次</span><br><span class="line">top <span class="operator">-d</span> -<span class="number">2</span> -p3690 查看某个PID</span><br><span class="line">top -b -n <span class="number">2</span> &gt;/tmp/top.txt 将top的信息进行<span class="number">2</span>次，然后将结果输出到/tmp/top.txt</span><br><span class="line"></span><br><span class="line">free -m 查看系统内存使用情况</span><br><span class="line"></span><br><span class="line">uptime 显示目前系统开机时间(查看开机多久，多少人登陆，过去<span class="number">1</span>,<span class="number">5</span>,<span class="number">15</span>分钟系统的负载)</span><br></pre></td></tr></table></figure>
+<h3 id="文件比软件:">文件比软件:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmp cmp（“compare”的缩写）命令用来简要指出两个文件是否存在差异，它的使用权限是所有用户</span><br><span class="line">diff diff命令用于两个文件之间的比较，并指出两者的不同，它的使用权限是所有用户</span><br></pre></td></tr></table></figure>
+<h3 id="远程操作与文件传输">远程操作与文件传输</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh user@remote.machine</span><br><span class="line">scp user@remote.machine:/remote/path /<span class="built_in">local</span>/path</span><br><span class="line">scp /<span class="built_in">local</span>/path user@remote.machine:/remote/path</span><br></pre></td></tr></table></figure>
+<h3 id="编译c/c++文件">编译c/c++文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcc</span><br><span class="line">gcc -v 查看GCC版本</span><br><span class="line">gcc -o <span class="built_in">test</span> test.c <span class="number">2</span>&gt;errfile 编译test.c时若有错误信息，则将错误信息重定向到errfile</span><br></pre></td></tr></table></figure>
+<h3 id="自动化执行">自动化执行</h3><p>  at 执行一次<br>  crontab 定时循环执行程序<br>  crontab 介绍<br>  1 以root登录    2 # crontab -e   3 加入一行<br>  1 <em>/12 </em> <em> </em> /usr/sbin/ntpdate pool.ntp.org</p>
+<h3 id="关机和重启:">关机和重启:</h3><p>  shutwond [-t 秒数] [-rkhncff] 时间 [警告信息]<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now 立刻关机，其中now相当于时间为<span class="number">0</span>,halt,poweroff也可以关机,或者直接init <span class="number">0</span></span><br><span class="line">shutdown -h <span class="number">20</span>:<span class="number">30</span> 系统将在今晚的<span class="number">8</span>:<span class="number">30</span>关机</span><br><span class="line">shutdown -h +<span class="number">10</span> 系统再过十分钟后自动关机.</span><br><span class="line">shutdown -t3 -r now 立刻重新开机，但在警告和删除processes这间，</span><br><span class="line">shutdown -k now ‘Hey! Go away! now…’ 发出警告信息，但没有真的关机.</span><br></pre></td></tr></table></figure></p>
+<p>  reboot:</p>
+<h3 id="TAB_巧用tab键，当你不知道文件或命令的全名是请连续按两下tab键-">TAB 巧用tab键，当你不知道文件或命令的全名是请连续按两下tab键.</h3><h3 id="clear_清屏">clear 清屏</h3><h3 id="dmesg_|more_显示开机信息(查看系统启动时硬件信息)">dmesg |more 显示开机信息(查看系统启动时硬件信息)</h3><h3 id="改变程序执行的优秀级">改变程序执行的优秀级</h3><pre><code>nice 设置优先权 nice -n -<span class="number">5</span> vi &amp; 用root给一个nice值为-<span class="number">5</span>,用于执行vi
+renice 调整已存在优先权
+</code></pre><h3 id="linux的几种解压缩命令">linux的几种解压缩命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">zip archive_name.zip file_to_compress</span><br><span class="line">unzip archive_name.zip</span><br><span class="line"></span><br><span class="line">gzip aaa 压缩命令</span><br><span class="line">gzip <span class="operator">-d</span> aaa.gz 解压命令</span><br><span class="line"></span><br><span class="line">tar czvf aaa.tar.gz aaa 将目录aaa压缩成aaa.tar.gz</span><br><span class="line">tar -N ’<span class="number">2007</span>/<span class="number">03</span>/<span class="number">01</span>′ -zcvf home.tar.gz /home 在/home当中,比<span class="number">2007</span>/<span class="number">03</span>/<span class="number">01</span>新的文件才备份.</span><br><span class="line">tar –exclude /home/cao -zxvf myfile.tar.gz /home/* /etc 要备份/home,/etc，但不要/home/cao</span><br><span class="line"><span class="built_in">cd</span> /tmp; tar -cvf -/etc | tar -xvf – 将/etc/打包后直接解开/tmp底下，而不产生文件.</span><br><span class="line">tar zxvf aaa.tar.gz 解压缩命令.</span><br><span class="line">tar jxvf aaa.tar.bz2 解压命令</span><br><span class="line">tar zxvf aaa.tar.gz -C /var/www 将aaa.tar.gz解压到/var/www目录下</span><br><span class="line">cpio -covB &gt; [file|device] 备份</span><br><span class="line">cpio -icduv &lt; [file|device] 还原</span><br></pre></td></tr></table></figure>
+<h3 id="网络命令">网络命令</h3><pre><code>ifconfig 显示或设置网络设备,可以查看当前ip,类似于windows里的ipconfig
+service network <span class="function"><span class="title">restart</span><span class="params">(/etc/rc.d/init.d/network restart)</span></span> 重启网卡
+ifdown eth0 关闭网卡
+ifup eth0 开启网卡
+route -n 查看路由表
+route add -net <span class="number">192.168</span>.<span class="number">20.1</span> netmask <span class="number">255.255</span>.<span class="number">255.0</span> dev eth0
+
+netstat 查看网络连接情况
+netstat -<span class="tag">i</span> 显示网卡运行情况
+netstat -r 查看主机的路由列表
+
+traceroute
+
+hostname 显示主机名
+hostname -<span class="tag">i</span> 显示当前主机名的IP.
+</code></pre><h3 id="安装软件包">安装软件包</h3><p>  rpm包安装:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh xxx.rpm 安装rpm包</span><br><span class="line">rpm -qa –last | less 根据安装日期显示已经安装的包</span><br><span class="line">rpm -qa |grep mysql -i 查询系统是否安装mysql包(-i,忽略大小写)</span><br><span class="line">rpm <span class="operator">-e</span> 删除安装的软件包</span><br><span class="line">rpm <span class="operator">-e</span> mysql* –nodpes 强制删除相关的软件包</span><br><span class="line">rpm –<span class="built_in">test</span> 测试安装</span><br><span class="line">rpm -qi 查询mysql套件的说明资料</span><br><span class="line">rpm -qpl xxx.rpm 查看rpm包内含的内容.</span><br><span class="line">rpm -qc[d] 设定档与说明档</span><br><span class="line">rpm -Uvh 升级安装</span><br><span class="line">rpmbuild –bb SPECS/xxx.spec 重新装将xxx.spec编译成rpm包.</span><br><span class="line">rpmbuild –rebuild packagename.src.rpm 重新把.src.rpm编译成rpm包.</span><br><span class="line">`</span><br></pre></td></tr></table></figure></p>
+<p>  源码编译安装(经典)<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./configure 检查系统信息(./configure –<span class="built_in">help</span> | more 帮助信息，可以看到相关的参数设定)</span><br><span class="line">make clean 清除之前留下的文件</span><br><span class="line">make 编译</span><br><span class="line">make install 安装</span><br><span class="line"><span class="comment">#注:源码包安装，一般先将文件解压，安装过程大致上面几步，具体说明一般见解压后目录里的(INSTALL,READEME说明.)</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="参考">参考</h2><p><a href="http://weiwu83.iteye.com/blog/465640" target="_blank" rel="external">Linux 常用命令使用方法大搜刮</a><br><a href="http://blog.csdn.net/ljianhui/article/details/11100625" target="_blank" rel="external">初窥Linux 之 我最常用的20条命令</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cheatsheet/">cheatsheet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/Linux/">Linux</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-git-commands" class="article article-type-post" itemscope itemprop="blogPost">
   
